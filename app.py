@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request, render_template
+from dotenv import load_dotenv
+import os
 import pandas as pd
 import joblib
 import requests
 import json
 import logging
 
+load_dotenv()
 app = Flask(__name__)
 
 def send_data_to_laravel(data, endpoint, csrf_token):
@@ -22,6 +25,16 @@ logging.basicConfig(level=logging.DEBUG)
 @app.route("/")
 def index():
     return render_template("homepage.html")
+
+@app.route("/ping", methods=["GET"])
+def ping():
+    version = os.environ.get("APP_VERSION", "0")
+    return jsonify({
+        "status": "success",
+        "message": "ping api successfully",
+        "app": "Assistify API",
+        "version": version
+    })
 
 @app.route("/process", methods=["POST"])
 def process_file():
