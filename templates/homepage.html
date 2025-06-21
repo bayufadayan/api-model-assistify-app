@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Assistify API Status</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Segoe UI", "Arial", sans-serif;
+      }
+      .card {
+        background: #fffdfa;
+        padding: 2.5rem 2rem 2rem 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 32px rgba(255, 140, 77, 0.16),
+          0 1.5px 3px rgba(0, 0, 0, 0.04);
+        text-align: center;
+        max-width: 460px;
+        width: 96%;
+        transition: box-shadow 0.2s;
+      }
+      .card:hover {
+        box-shadow: 0 12px 40px rgba(255, 140, 77, 0.22),
+          0 3px 8px rgba(0, 0, 0, 0.07);
+      }
+      .row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0px;
+        margin-bottom: 1.2rem;
+      }
+      .logo-wrap {
+        background: transparent;
+        border-radius: 15px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .logo {
+        width: 64px;
+        height: 64px;
+        border-radius: 14px;
+        object-fit: cover;
+        display: block;
+      }
+      .banner-wrap {
+        background: transparent;
+        border-radius: 15px;
+        padding: 6px 0px 6px 0px;
+        margin: 0 -10px 0px -10px
+        display: flex;
+        align-items: center;
+        max-width: 260px;
+        width: 100%;
+      }
+      .banner-img {
+        width: 100%;
+        max-width: 240px;
+        height: auto;
+        border-radius: 10px;
+        display: block;
+        transform: scale(1);
+        transition: transform 0.3s;
+        margin: 0 auto;
+      }
+      .banner-img:hover {
+        transform: scale(1.13);
+      }
+      h1 {
+        margin: 0 0 0.3em 0;
+        font-size: 1.7rem;
+        letter-spacing: 0.01em;
+        color: #f98a19;
+        font-family: inherit;
+        font-weight: 700;
+      }
+      .status {
+        display: inline-block;
+        background: #eaffea;
+        color: #28b94d;
+        font-weight: 600;
+        font-size: 1.04em;
+        padding: 0.2em 0.8em;
+        border-radius: 1em;
+        margin-bottom: 1em;
+        margin-top: 0.2em;
+      }
+      .subtitle {
+        font-size: 1.02em;
+        color: #555;
+        margin-bottom: 1.4em;
+        margin-top: 0.6em;
+      }
+      p {
+        color: #666;
+        font-size: 1.04em;
+        margin-top: 0.6em;
+        margin-bottom: 1.2em;
+      }
+      .by {
+        margin-top: 2.2em;
+        font-size: 0.95em;
+        color: #aaa;
+      }
+      .by span {
+        font-weight: 500;
+        color: #e57f30;
+        font-family: "Segoe UI", "Arial", sans-serif;
+      }
+      @media (max-width: 640px) {
+        .card { padding: 1.1rem 0.2rem 1.4rem 0.2rem; }
+        .row { gap: 10px; }
+        .logo { width: 46px; height: 46px; }
+        .banner-wrap { max-width: 130px; padding: 4px; }
+        .banner-img { max-width: 110px; }
+      }
+      @media (max-width: 440px) {
+        .row { flex-direction: column; gap: 8px; }
+        .banner-wrap { max-width: 95vw; }
+        .banner-img { max-width: 98vw; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="row">
+        <span class="logo-wrap">
+          <img src="{{ url_for('static', filename='favikon.png') }}" alt="Assistify Logo" class="logo">
+        </span>
+        <span class="banner-wrap">
+          <img 
+            src="{{ url_for('static', filename='Primary-Secondary.png') }}" 
+            alt="Assistify Main Banner" 
+            class="banner-img">
+        </span>
+      </div>
+      <h1>Assistify API is <span class="status">Online</span></h1>
+      <div class="subtitle">
+        This API handles requests from the <strong><a href="https://assistify.bayufadayan.my.id" target="_blank">Assistify App</a></strong>.
+      </div>
+      <p>
+        Welcome!<br />
+        Everything is running smoothly.<br />
+        Ready to assist your needs anytime.
+      </p>
+      <div class="by">
+        Made with <span>🤍</span> by <span>Bayu Fadayan</span>
+      </div>
+    </div>
+  </body>
+</html>

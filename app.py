@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 import pandas as pd
 import joblib
 import requests
@@ -21,7 +21,7 @@ logging.basicConfig(level=logging.DEBUG)
 
 @app.route("/")
 def index():
-    return "Flask API is running."
+    return render_template("homepage.html")
 
 @app.route("/process", methods=["POST"])
 def process_file():
