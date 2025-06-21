@@ -8,10 +8,12 @@ import json
 import logging
 
 load_dotenv()
+baseUrl = os.environ.get("FRONTEND_URL", "http://localhost:8000")
 app = Flask(__name__)
 
 def send_data_to_laravel(data, endpoint, csrf_token):
-    url = f'http://127.0.0.1:8000/api/{endpoint}'
+
+    url = f'{baseUrl}/api/{endpoint}'
     headers = {'Content-Type': 'application/json', 'X-CSRF-TOKEN': csrf_token}
     response = requests.post(url, json={'data': data}, headers=headers)
     return response
@@ -134,9 +136,10 @@ def normalize_data():
         # Kirim data ke Laravel untuk disimpan
         result = df.to_dict(orient="records")
         csrf_token = get_csrf_token()
+    
         logging.debug(f"Sending data to Laravel with CSRF token: {csrf_token}")
         response = requests.post(
-            "http://127.0.0.1:8000/store-normalized-data",
+            f"{baseUrl}/store-normalized-data",
             headers={"Content-Type": "application/json", "X-CSRF-TOKEN": csrf_token},
             data=json.dumps(result),
         )
@@ -177,8 +180,9 @@ def process_saw():
         csrf_token = get_csrf_token()
 
         # Kirim data ke Laravel untuk disimpan
+    
         response = requests.post(
-            "http://127.0.0.1:8000/store-saw-results",
+            f"{baseUrl}/store-saw-results",
             headers={"Content-Type": "application/json", "X-CSRF-TOKEN": csrf_token},
             data=json.dumps(result),
         )
@@ -193,7 +197,8 @@ def process_saw():
         return f"Failed to process SAW: {str(e)}", 500
 
 def get_criteria():
-    response = requests.get("http://127.0.0.1:8000/criteria")
+
+    response = requests.get(f"{baseUrl}/criteria")
     if response.status_code == 200:
         criteria_list = response.json()
         criteria = {}
@@ -211,7 +216,8 @@ def get_criteria():
         raise Exception("Failed to fetch criteria from Laravel")
 
 def get_csrf_token():
-    response = requests.get("http://127.0.0.1:8000/csrf-token")
+
+    response = requests.get(f"{baseUrl}/csrf-token")
     if response.status_code == 200:
         try:
             csrf_token = response.json()['csrf_token']
